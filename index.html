@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriBot AI - Oportunidade de Investimento Seed</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        :root {
+            --bg-dark: #0A0A0A; --bg-card: #141414; --primary-accent: #00A3FF;
+            --secondary-accent: #FF4D00; --highlight-accent: #AFFF33; --text-light: #FFFFFF;
+            --text-secondary: #B3B3B3; --border-color: #2F2F2F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.7; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 120px 0; overflow-x: hidden; }
+        h1, h2, h3 { font-weight: 900; line-height: 1.1; }
+        h1 { font-size: 4.5rem; letter-spacing: -3px; }
+        h2 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 20px; }
+        h3 { font-size: 2.5rem; color: var(--text-light); margin-bottom: 20px;}
+        p { font-size: 1.2rem; max-width: 700px; color: var(--text-secondary); }
+        .text-center { text-align: center; }
+        .text-center p { margin-left: auto; margin-right: auto; }
+        .logo-link { position: absolute; top: 25px; left: 30px; z-index: 1000; transition: transform 0.2s ease; }
+        .logo-link:hover { transform: scale(1.05); }
+        .logo-link img { height: 150px; }
+        .hero { height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 70px; position: relative; overflow: hidden; background-color: var(--bg-dark); }
+        #hero-video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 1; }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 10, 10, 0.7); z-index: 2; }
+        .hero .container { position: relative; z-index: 3; }
+        .hero h1 { background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.4rem; max-width: 800px; margin: 20px auto 40px; }
+        .cta-button { display: inline-block; background: var(--primary-accent); color: #000; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-size: 1.2rem; font-weight: 900; transition: transform 0.2s ease, box-shadow 0.2s ease; border: none; cursor: pointer; white-space: nowrap; }
+        .hero .cta-button { font-size: 1.4rem; padding: 20px 50px; box-shadow: 0 0 25px rgba(0, 163, 255, 0.5); }
+        .grid-2-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; align-items: start; margin-top: 60px; }
+        .grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; text-align: center;}
+        .grid-4-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; text-align: center; }
+        .competitor-card { background: var(--bg-card); padding: 30px; border: 1px solid var(--border-color); border-radius: 15px; display: flex; flex-direction: column; }
+        .competitor-card h3 { font-size: 1.5rem; color: var(--primary-accent); }
+        .competitor-card .metric { font-size: 1.8rem; font-weight: 700; color: var(--text-light); margin: 15px 0 5px; }
+        .competitor-card p { font-size: 0.95rem; text-align: left; margin-top: 20px; color: var(--text-secondary); max-width: 100%; flex-grow: 1; }
+        .info-card { background: var(--bg-card); padding: 30px; border: 1px solid var(--border-color); border-radius: 20px; text-align: center; }
+        .info-card .value { font-size: 4rem; font-weight: 900; color: var(--highlight-accent); }
+        .info-card .explanation { font-size: 1rem; color: var(--text-secondary); max-width: 100%; margin-top: 15px;}
+        #team .founder-grid { display: grid; grid-template-columns: 250px 1fr; gap: 50px; align-items: flex-start; max-width: 1000px; margin: 60px auto 0; text-align: left;}
+        #team .founder-photo-container { text-align: center;}
+        #team .founder-photo-container img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-accent); }
+        #team .founder-photo-container h3 { font-size: 2rem; font-weight: 900; }
+        #team .founder-photo-container .role { color: var(--highlight-accent); font-weight: 700; font-size: 1.2rem; }
+        #team .founder-bio ul { list-style: none; padding: 0; margin-top: 20px; }
+        #team .founder-bio li { background: var(--bg-card); border-left: 4px solid var(--primary-accent); padding: 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0;}
+        #team .founder-bio li strong { display: block; color: var(--text-light); font-size: 1.2rem; margin-bottom: 5px;}
+        #team .founder-bio p { font-size: 1rem; max-width: 100%; color: var(--text-secondary);}
+        .profit-card { background: var(--bg-card); padding: 30px; border: 1px solid var(--border-color); border-radius: 20px; text-align: center; }
+        .profit-card .margin-value { font-size: 3.5rem; font-weight: 900; color: var(--highlight-accent); margin-top: 15px;}
+        #investment .investment-details { background: var(--bg-card); border: 2px solid var(--primary-accent); border-radius: 20px; padding: 50px; max-width: 800px; margin: 60px auto 0; }
+        #investment .investment-grid p { font-size: 2.5rem; font-weight: 900; color: var(--highlight-accent); }
+        #investment .resource-allocation ul { list-style: none; padding: 0; margin-top: 15px; text-align: left;}
+        #investment .resource-allocation li { display: flex; justify-content: space-between; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid var(--border-color); }
+        footer { background-color: #000; color: var(--text-secondary); text-align: center; padding: 40px 0; border-top: 1px solid var(--border-color); }
+        
+        .highlight-green { color: var(--highlight-accent); font-weight: 700; }
+        .highlight-primary { color: var(--primary-accent); font-weight: 700; }
+        .highlight-secondary { color: var(--secondary-accent); font-weight: 700; }
+        .animated-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .in-view { opacity: 1; transform: translateY(0); }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 25px rgba(0, 163, 255, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 163, 255, 0.7); }
+            100% { box-shadow: 0 0 25px rgba(0, 163, 255, 0.4); }
+        }
+        .cta-pulse { animation: pulse-glow 2.5s infinite; }
+        
+        .info-card:hover { transform: translateY(-10px); border-color: var(--highlight-accent); box-shadow: 0 15px 30px rgba(175, 255, 51, 0.1); }
+        .competitor-card:hover { transform: translateY(-10px); border-color: var(--primary-accent); box-shadow: 0 15px 30px rgba(0, 163, 255, 0.1); }
+        .profit-card:hover { transform: scale(1.03); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        #team .founder-bio li:hover { background-color: #1f1f1f; border-left-width: 8px; transform: translateX(5px); }
+        
+        /* ESTILO ATUALIZADO PARA O CTA FINAL */
+        @keyframes final-cta-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        #final-cta {
+            background: linear-gradient(-45deg, #1a0802, #8c3c18, #b34d20, #2c1a13);
+            background-size: 400% 400%;
+            animation: final-cta-flow 15s ease infinite;
+        }
+        #final-cta h2 { color: var(--text-light); }
+        #final-cta p { color: rgba(255,255,255,0.8); }
+        #final-cta .cta-button { 
+            background: #fff;
+            color: #000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 992px) { .grid-4-col, .grid-3-col { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+             h1 { font-size: 2.8rem; letter-spacing: -2px; } h2 { font-size: 2.5rem; } section { padding: 80px 0; }
+             .grid-2-col, .grid-4-col, .grid-3-col, #team .founder-grid { grid-template-columns: 1fr; text-align: center;}
+             #team .founder-bio li, #team .founder-bio p { text-align: left; }
+             #team .founder-photo-container { margin-bottom: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="logo-link"><img src="logo.png" alt="NutriBot AI Logo"></a>
+
+    <header class="hero">
+        <video id="hero-video" autoplay loop muted playsinline><source src="video.mp4" type="video/mp4"></video>
+        <div class="container">
+            <h1>Investimento Seed:<br>Redefinindo a Alta Performance Humana com IA</h1>
+            <p>Buscamos parceiros estratégicos para escalar o primeiro <span class="highlight-green">Sistema Operacional</span> que unifica Nutrição, Treino e Análise de Dados para um mercado global de atletas e entusiastas do fitness.</p>
+            <!-- EFEITO DE PULSO ADICIONADO AQUI -->
+            <a href="#investment" class="cta-button cta-pulse">Conheça a Oportunidade</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ... (todas as outras seções permanecem exatamente iguais) ... -->
+        
+        <section id="problem" class="text-center">
+            <div class="container">
+                <h2 class="animated-item" style="color: var(--secondary-accent);">O Problema: Um Mercado <span class="highlight-secondary">Fragmentado e Ineficiente</span></h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Atletas e entusiastas do fitness utilizam, em média, de 3 a 5 aplicativos para monitorar nutrição, treinos e progresso. Essa fragmentação gera dados imprecisos, baixa adesão e, consequentemente, resultados abaixo do esperado. O <span class="highlight-secondary">"achismo"</span> ainda domina um setor que anseia por precisão e personalização.</p>
+            </div>
+        </section>
+
+        <section id="why-now" style="background-color: #000;">
+            <div class="container text-center">
+                <h2 class="animated-item">O Ponto de Inflexão: <span class="highlight-primary">Por que Agora?</span></h2>
+                <p class="animated-item" style="transition-delay: 100ms;">A oportunidade para o NutriBot AI não é apenas uma boa ideia, é o resultado da convergência de três forças massivas, criando um momento único no mercado.</p>
+                <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms;">
+                        <h3 style="color:var(--primary-accent);">Inflexão Tecnológica</h3>
+                        <p class="explanation">A explosão da <span class="highlight-green">IA multimodal (GPT-4o)</span> tornou a análise de fotos, voz e PDFs economicamente viável pela primeira vez. O que era ficção científica há 2 anos, agora é uma API. Estamos surfando no topo desta onda.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms;">
+                        <h3 style="color:var(--primary-accent);">Inflexão de Mercado</h3>
+                        <p class="explanation">O mercado de fitness evoluiu da estética para a <span class="highlight-green">performance e longevidade</span>. Os consumidores estão famintos por dados que conectem seus hábitos (nutrição) aos seus resultados (performance).</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 500ms;">
+                        <h3 style="color:var(--primary-accent);">Inflexão Cultural</h3>
+                        <p class="explanation">Na era do <span class="highlight-green">"Eu Quantificado" (Quantified Self)</span>, os consumidores de alta performance já pagam por dados (anéis Oura, sensores de glicose). A precisão é a nova moeda, e o "achismo" não é mais aceitável.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="product-maturity">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="animated-item">Maturidade do Produto: Um MVP <span class="highlight-green">Robusto e Funcional</span></h2>
+                    <p class="animated-item" style="transition-delay: 100ms;">Reduzimos o risco de execução. O NutriBot AI não é um conceito; é uma plataforma funcional com um conjunto de features avançadas que já validam nossa visão de negócio.</p>
+                </div>
+                <div class="grid-2-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3>Input Multimodal e <span class="highlight-primary">Zero-Atrito</span></h3>
+                        <ul style="list-style-position: inside; padding: 0;">
+                            <li><span class="highlight-green">✓</span> Análise por Foto, Voz e PDF</li>
+                            <li><span class="highlight-green">✓</span> Busca Manual Inteligente e Rápida</li>
+                            <li><span class="highlight-green">✓</span> Plataforma 100% via Telegram</li>
+                        </ul>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                        <h3>Inteligência de Dados e <span class="highlight-primary">Visualização</span></h3>
+                         <ul style="list-style-position: inside; padding: 0;">
+                            <li><span class="highlight-green">✓</span> Base de Dados Localizada (Tabela TACO)</li>
+                            <li><span class="highlight-green">✓</span> Geração de Gráficos de Evolução</li>
+                            <li><span class="highlight-green">✓</span> IA Conversacional Contextualizada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center animated-item" style="transition-delay: 450ms;">
+                    <a href="#" class="demo-link">▶️ Veja o Futuro em Ação (Demo de 2 Minutos)</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="competition" style="background-color: #000;">
+            <div class="container text-center">
+                 <h2 class="animated-item">Cenário Competitivo <span class="highlight-green">Validado</span></h2>
+                 <p class="animated-item" style="transition-delay: 100ms;">O mercado de Health & Fitness Apps possui players de alto valor, validando a demanda. Analisando suas trajetórias, fica claro o potencial para uma solução inovadora como o NutriBot AI.</p>
+                 <div class="grid-4-col">
+                     <div class="competitor-card animated-item" style="transition-delay: 200ms;">
+                         <h3>MyFitnessPal</h3>
+                         <div class="metric"><span class="highlight-green">US$ 310M</span></div>
+                         <div class="metric-label">Receita Estimada (2023)</div>
+                         <p><strong>Evolução:</strong> Adquirido por US$ 475M em 2015. Validou o modelo de tracking nutricional em massa, mas estagnou em inovação.</p>
+                     </div>
+                     <div class="competitor-card animated-item" style="transition-delay: 350ms;">
+                         <h3>Strava</h3>
+                         <div class="metric"><span class="highlight-green">US$ 275M</span></div>
+                         <div class="metric-label">Receita (2023)</div>
+                         <p><strong>Evolução:</strong> Atingiu uma avaliação de US$ 2.2B em 2025. Dominou o social para cardio, mas possui nutrição limitada.</p>
+                     </div>
+                      <div class="competitor-card animated-item" style="transition-delay: 500ms;">
+                         <h3>WHOOP</h3>
+                         <div class="metric"><span class="highlight-green">US$ 3.6B</span></div>
+                         <div class="metric-label">Última Avaliação (2021)</div>
+                         <p><strong>Evolução:</strong> Levantou mais de US$ 400M. Provou o modelo de assinatura premium para dados de recuperação, mas não oferece tracking nutricional.</p>
+                     </div>
+                     <div class="competitor-card animated-item" style="transition-delay: 650ms;">
+                         <h3>Tecnonutri (Vitat)</h3>
+                         <div class="metric"><span class="highlight-green">11M+</span></div>
+                         <div class="metric-label">Downloads (Plataforma)</div>
+                         <p><strong>Evolução:</strong> Adquirido pela Raia Drogasil. Mostra o interesse do grande varejo no setor, mas com foco generalista, sem a IA do NutriBot AI.</p>
+                     </div>
+                 </div>
+            </div>
+        </section>
+        
+        <section id="market-size">
+            <div class="container text-center">
+                <h2 class="animated-item">Quantificando a Oportunidade de Mercado</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Nossas projeções são apenas o começo. Estamos inseridos em um mercado massivo e em crescimento, com um caminho claro para nos tornarmos um player significativo.</p>
+                <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms;">
+                        <div class="value count-up" data-target="25" data-suffix="B" data-prefix="$">0</div>
+                        <p class="label">TAM (Mercado Total Endereçável)</p>
+                        <p class="explanation">O mercado global de aplicativos de Health & Fitness, projetado para 2025.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms;">
+                        <div class="value count-up" data-target="3" data-suffix="B" data-prefix="R$">0</div>
+                        <p class="label">SAM (Mercado Endereçável Acessível)</p>
+                        <p class="explanation">O mercado de apps de fitness e nutrição na América Latina, nosso foco inicial de expansão.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 500ms;">
+                        <div class="value" style="color: var(--primary-accent);"><span class="count-up" data-target="10" data-prefix="R$" data-suffix="M">0</span></div>
+                        <p class="label">SOM (Mercado Obtível Acessível)</p>
+                        <p class="explanation">Nossa meta de captura de receita anual nos próximos 3 anos, focando no nicho de alta performance no Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="our-edge" style="background-color: #000;">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="animated-item">O <span class="highlight-primary">Oceano Azul</span> do NutriBot AI: Onde nos Diferenciamos</h2>
+                    <p class="animated-item" style="transition-delay: 100ms;">Nossa estratégia não é competir, mas sim criar uma nova categoria ao integrar os pontos fortes dos concorrentes em uma única plataforma, eliminando suas principais fraquezas.</p>
+                </div>
+                 <div class="grid-2-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3>vs. MyFitnessPal & Tecnonutri</h3>
+                        <ul style="list-style-position: inside; padding: 0;">
+                            <li>Eles são apenas <span class="highlight-secondary">calculadoras de calorias.</span> Nós somos um <span class="highlight-primary">sistema de performance completo.</span></li>
+                            <li>Eles têm <span class="highlight-secondary">atrito no registro.</span> Nós oferecemos input por <span class="highlight-primary">voz, foto e PDF.</span></li>
+                            <li>MyFitnessPal <span class="highlight-secondary">não é localizado.</span> Nossa base <span class="highlight-primary">TACO</span> oferece precisão inigualável.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                        <h3>vs. Strava & WHOOP</h3>
+                         <ul style="list-style-position: inside; padding: 0;">
+                            <li>Eles <span class="highlight-secondary">ignoram o combustível.</span> Nós colocamos a <span class="highlight-primary">nutrição no centro</span> da análise.</li>
+                            <li>Eles dependem de <span class="highlight-secondary">hardware caro.</span> Nossa solução é <span class="highlight-primary">100% software.</span></li>
+                             <li>Eles são <span class="highlight-secondary">sistemas fechados.</span> Nós nos <span class="highlight-primary">integramos à vida do usuário.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="unit-economics">
+            <div class="container text-center">
+                <h2 class="animated-item">Unit Economics: A Máquina de Crescimento Lucrativo</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Nosso modelo é construído sobre uma base de aquisição orgânica ultraeficiente, o que nos permite escalar com o capital de forma inteligente e com um retorno claro sobre o investimento.</p>
+                <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms;">
+                        <div class="value" style="font-size: 3rem;"><span class="count-up" data-target="50" data-prefix="< R$">0</span></div>
+                        <p class="label">CAC Alvo (Custo de Aquisição)</p>
+                        <p class="explanation">Graças à nossa motriz orgânica, nosso CAC inicial é próximo de zero. Com o capital, projetamos um CAC controlado abaixo de R$ 50, baseado em <span class="highlight-primary">benchmarks do setor e testes preliminares.</span></p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms;">
+                        <div class="value"><span class="count-up" data-target="540" data-prefix="R$">0</span></div>
+                        <p class="label">LTV (Lifetime Value)</p>
+                        <p class="explanation">Projeção conservadora baseada em 12 meses para o plano intermediário. A natureza integrada do nosso produto visa <span class="highlight-primary">aumentar a retenção</span> e superar esta média.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 500ms;">
+                        <div class="value" style="color:var(--primary-accent);"><span class="count-up" data-target="10" data-suffix="x" data-prefix=">">0</span></div>
+                        <p class="label">Retorno por Cliente (LTV/CAC)</p>
+                        <p class="explanation">Cada R$ 1 investido na fase de escala tem o potencial de retornar mais de R$ 10, demonstrando um modelo de negócio <span class="highlight-primary">altamente lucrativo.</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="profitability-analysis" style="background-color: #000;">
+            <div class="container text-center">
+                <h2 class="animated-item">A Prova da Escalabilidade Lucrativa</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Analisamos detalhadamente os custos de API para cada ação do usuário. O resultado é um negócio com margens de contribuição extremamente saudáveis, garantindo que o crescimento seja sempre lucrativo.</p>
+                <div class="grid-3-col">
+                    <div class="profit-card animated-item" style="transition-delay: 200ms;">
+                        <h3>Plano Performance</h3>
+                        <div class="price">R$ 29,90 / mês</div>
+                        <div class="margin-value"><span class="count-up" data-target="89.2" data-suffix="%">0</span></div>
+                        <p class="margin-label">Margem Bruta Mínima</p>
+                        <p class="cost-info">(Custo Máximo de API: R$ 3,21)</p>
+                    </div>
+                     <div class="profit-card animated-item" style="transition-delay: 350ms;">
+                        <h3>Plano Absoluta</h3>
+                        <div class="price">R$ 59,90 / mês</div>
+                        <div class="margin-value"><span class="count-up" data-target="85.7" data-suffix="%">0</span></div>
+                        <p class="margin-label">Margem Bruta Mínima</p>
+                        <p class="cost-info">(Custo Máximo de API: R$ 8,56)</p>
+                    </div>
+                     <div class="profit-card animated-item" style="transition-delay: 500ms;">
+                        <h3>Plano Elite</h3>
+                        <div class="price">R$ 99,90 / mês</div>
+                        <div class="margin-value"><span class="count-up" data-target="80.7" data-suffix="%">0</span></div>
+                        <p class="margin-label">Margem Bruta Mínima</p>
+                        <p class="cost-info">(Custo Máximo de API: R$ 19,26)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="go-to-market">
+            <div class="container text-center">
+                <h2 class="animated-item">Go-to-Market: Nossa Estratégia de Aquisição em 3 Fases</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Temos um plano claro para alcançar nossos primeiros 10.000 usuários e construir uma marca forte no nicho de alta performance.</p>
+                <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3 style="color: var(--primary-accent);">Fase 1: Bootstrap</h3>
+                        <p class="explanation"><strong>Foco:</strong> Provar o Product-Market Fit.<br><strong>Ações:</strong> Ativação da lista de espera e comunidade engajada (<span class="highlight-green">CAC ~R$0</span>). Parcerias com micro-influenciadores.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                        <h3 style="color: var(--primary-accent);">Fase 2: Scale</h3>
+                        <p class="explanation"><strong>Foco:</strong> Acelerar a aquisição.<br><strong>Ações:</strong> Campanhas de tráfego pago (<span class="highlight-green">CAC Alvo < R$50</span>), patrocínio de newsletters e programa de afiliados.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 500ms; text-align: left;">
+                        <h3 style="color: var(--primary-accent);">Fase 3: Dominate</h3>
+                        <p class="explanation"><strong>Foco:</strong> Liderança de mercado.<br><strong>Ações:</strong> Lançamento do <span class="highlight-green">Dashboard B2B</span>, criação de conteúdo de autoridade (SEO) e expansão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projections" style="background-color: #000;">
+            <div class="container text-center">
+                <h2 class="animated-item">Projeção de Faturamento & Potencial de Retorno</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Com base em nossa estratégia de aquisição e unit economics, projetamos um crescimento exponencial nos próximos 2 anos.</p>
+                <div class="grid-2-col" style="align-items: center;">
+                    <div class="info-card animated-item" style="transition-delay: 200ms;">
+                        <div class="value"><span class="count-up" data-target="1.35" data-prefix="R$" data-suffix="M">0</span></div>
+                        <p class="label">ARR (Receita Anual) - Ano 1</p>
+                        <p class="explanation">(Baseado em 2.500 usuários pagantes)</p>
+                    </div>
+                     <div class="info-card animated-item" style="transition-delay: 350ms;">
+                        <div class="value"><span class="count-up" data-target="5.4" data-prefix="R$" data-suffix="M">0</span></div>
+                        <p class="label">ARR (Receita Anual) - Ano 2</p>
+                         <p class="explanation">(Baseado em 10.000 usuários pagantes)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="product-roadmap">
+            <div class="container text-center">
+                <h2 class="animated-item">Roadmap do Produto: Construindo o Futuro da Performance</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Nosso MVP é apenas o começo. Temos uma visão clara para evoluir o produto, aumentar o valor para o usuário e construir um fosso competitivo (moat) ainda maior.</p>
+                 <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3 style="color: var(--highlight-accent);">Próximos 6 Meses</h3>
+                        <ul style="list-style-position: inside; padding: 0;">
+                            <li>Integração com Apple Health / Google Fit</li>
+                            <li>Analytics avançados no dashboard</li>
+                            <li>Gamificação e desafios sociais</li>
+                        </ul>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                        <h3 style="color: var(--highlight-accent);">Próximos 12 Meses</h3>
+                        <ul style="list-style-position: inside; padding: 0;">
+                           <li>Lançamento do Dashboard B2B</li>
+                           <li>Integrações com wearables (Garmin)</li>
+                           <li>Otimização de performance com IA</li>
+                        </ul>
+                    </div>
+                     <div class="info-card animated-item" style="transition-delay: 500ms; text-align: left;">
+                        <h3 style="color: var(--highlight-accent);">Visão de Futuro</h3>
+                        <ul style="list-style-position: inside; padding: 0;">
+                            <li>Coaching preditivo baseado em IA</li>
+                            <li>Expansão internacional (LatAm)</li>
+                            <li>Marketplace de serviços</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="risks-mitigation" style="background-color: #000;">
+             <div class="container text-center">
+                <h2 class="animated-item">Análise de Riscos e Estratégias de Mitigação</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Todo negócio possui riscos. Nossa abordagem é antecipá-los e ter um plano claro para mitigá-los, demonstrando maturidade e pensamento estratégico.</p>
+                 <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3 style="color: var(--secondary-accent);">Risco de Competição</h3>
+                        <p class="explanation"><strong>"E se o MyFitnessPal adicionar IA?"</strong><br>Nossa mitigação é o <span class="highlight-green">foco no nicho</span>, a <span class="highlight-green">integração treino-nutrição</span> e a base de dados <span class="highlight-green">localizada (TACO)</span>, criando um diferencial difícil de copiar.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                         <h3 style="color: var(--secondary-accent);">Risco de Execução</h3>
+                        <p class="explanation"><strong>"Você consegue entregar o roadmap?"</strong><br>Já mitigamos o maior risco ao <span class="highlight-green">construir um MVP robusto</span> por conta própria. O capital é para <span class="highlight-green">acelerar</span>, não para descobrir como fazer.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 500ms; text-align: left;">
+                        <h3 style="color: var(--secondary-accent);">Risco Tecnológico</h3>
+                        <p class="explanation"><strong>"E se a OpenAI aumentar os preços?"</strong><br>Nossas <span class="highlight-green">margens brutas altíssimas (+80%)</span> nos permitem absorver aumentos de custo. O roadmap prevê a exploração de modelos <span class="highlight-green">open-source</span> para otimização.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="team">
+            <div class="container text-center">
+                 <h2 class="animated-item">O Fundador: A Combinação Rara de Habilidade Técnica e Visão de Negócio</h2>
+                 <p class="animated-item" style="transition-delay: 100ms;">Somos liderados por um fundador com uma capacidade única de unir profundo conhecimento técnico com estratégia de negócios. A agilidade para construir um MVP robusto em tempo recorde e desenvolver este plano de negócios detalhado demonstra uma capacidade de execução e um foco que são nossos maiores ativos competitivos.</p>
+                 <div class="founder-grid animated-item" style="transition-delay: 200ms;">
+                     <div class="founder-photo-container">
+                        <img src="bruno.png" alt="Foto de Bruno Loureiro">
+                        <h3>Bruno Loureiro</h3>
+                        <p class="role">Fundador & CEO</p>
+                     </div>
+                     <div class="founder-bio">
+                         <ul>
+                            <li><strong>Visão de Negócio Estratégica:</strong><p>Formado em <span class="highlight-primary">Administração de Empresas (FAIT)</span>, com a capacidade de construir não apenas um produto, mas um negócio sustentável com unit economics sólidos desde o primeiro dia.</p></li>
+                            <li><strong>Excelência Técnica (Nível Harvard):</strong><p>Certificado em <span class="highlight-primary">Ciência da Computação (CS50, Harvard)</span>, com domínio completo do stack tecnológico necessário para executar a visão do NutriBot AI (Python, Langchain, React Native, SQL, Cloud).</p></li>
+                            <li><strong>Experiência Empreendedora Comprovada:</strong><p>Como Fundador e Líder Técnico da <span class="highlight-primary">StudioWeb</span>, já possui experiência em liderar projetos, gerenciar equipes e entregar soluções digitais que geram resultados concretos para clientes.</p></li>
+                         </ul>
+                     </div>
+                 </div>
+            </div>
+        </section>
+        
+        <section id="data-moat" style="background-color: #000;">
+            <div class="container text-center">
+                <h2 class="animated-item">Nosso Fosso Competitivo de Longo Prazo: O <span class="highlight-green">Ativo de Dados</span></h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Nossos concorrentes rastreiam calorias ou atividades. Nós geramos o ativo de dados mais valioso do ecossistema de performance humana: um <span class="highlight-primary">dataset correlacionado de causa e efeito.</span></p>
+                <div class="info-card animated-item" style="transition-delay: 200ms; max-width: 800px; margin: 60px auto 0; text-align: left;">
+                    <h3 style="color:var(--highlight-accent);">Este dataset proprietário nos permitirá, no futuro:</h3>
+                    <ul style="list-style-position: inside; padding: 0;">
+                        <li><strong>Construir um Coaching Preditivo de IA</strong> para otimizar a performance em tempo real.</li>
+                        <li><strong>Gerar Recomendações Hiper-Personalizadas</strong> de nutrição, treino e suplementação.</li>
+                        <li><strong>Tornar-se a Fonte da Verdade:</strong> Nenhum concorrente possui este nível de dados. Este é o nosso verdadeiro <span class="highlight-green">fosso (moat)</span> e a razão pela qual nosso valor de aquisição será exponencial.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="investment">
+            <div class="container text-center">
+                <h2 class="animated-item">O Investimento e o Plano de Execução</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Buscamos um parceiro estratégico para injetar o capital necessário para executar nosso plano de crescimento e dominar o mercado.</p>
+                <div class="investment-details animated-item" style="transition-delay: 200ms;">
+                    <h3>Estamos captando (Rodada Seed)</h3>
+                    <div class="investment-grid">
+                        <div>
+                            <h4>Investimento</h4>
+                            <p>R$ 200.000</p>
+                        </div>
+                        <div>
+                            <h4>Equity Oferecido</h4>
+                            <p>10%</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 1rem; color: var(--text-secondary);">Valuation Pré-Money: R$ 1.800.000</p>
+                    
+                    <div class="resource-allocation" style="margin-top: 30px;">
+                         <h3 style="font-size: 1.8rem; text-align: left;">Alocação de Recursos (12 Meses):</h3>
+                         <ul>
+                             <li><span>🚀 Marketing & Aquisição de Clientes (Fase 2)</span> <strong>R$ 80.000 (40%)</strong></li>
+                             <li><span>👨‍💻 Salário do Fundador (Runway)</span> <strong>R$ 72.000 (36%)</strong></li>
+                             <li><span>☁️ Infraestrutura & APIs (OpenAI, Cloud)</span> <strong>R$ 30.000 (15%)</strong></li>
+                             <li><span>💼 Custos Operacionais (Jurídico, Contábil)</span> <strong>R$ 18.000 (9%)</strong></li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="exit-strategy" style="background-color: #000;">
+            <div class="container text-center">
+                 <h2 class="animated-item">Visão de Longo Prazo e Estratégia de Saída (Exit)</h2>
+                 <p class="animated-item" style="transition-delay: 100ms;">Nossa visão é consolidar o NutriBot AI como o sistema operacional da performance humana na América Latina. Os dados coletados são o nosso ativo mais valioso, abrindo portas para um exit estratégico que maximizará o retorno para nossos investidores.</p>
+                 <div class="grid-3-col">
+                    <div class="info-card animated-item" style="transition-delay: 200ms; text-align: left;">
+                        <h3 style="color: var(--secondary-accent);">Aquisição por Players de Wearables</h3>
+                        <p class="explanation">Empresas como <span class="highlight-green">Garmin ou Apple</span> buscam fortalecer seus ecossistemas de software. A integração dos nossos dados seria um diferencial estratégico.</p>
+                    </div>
+                    <div class="info-card animated-item" style="transition-delay: 350ms; text-align: left;">
+                        <h3 style="color: var(--secondary-accent);">Aquisição por Varejo de Saúde</h3>
+                        <p class="explanation">Seguindo o movimento da <span class="highlight-green">Raia Drogasil com a Vitat</span>, grandes redes (ex: <span class="highlight-green">Smart Fit, Gympass</span>) podem ver o NutriBot AI como uma forma de agregar valor.</p>
+                    </div>
+                     <div class="info-card animated-item" style="transition-delay: 500ms; text-align: left;">
+                        <h3 style="color: var(--secondary-accent);">Aquisição por Gigantes do Fitness</h3>
+                        <p class="explanation">Players internacionais como <span class="highlight-green">Peloton ou iFit</span> que buscam expandir sua presença no mercado latino-americano são potenciais compradores estratégicos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="final-cta">
+            <div class="container text-center">
+                <h2 class="animated-item">Seja parte da revolução da performance.</h2>
+                <p class="animated-item" style="transition-delay: 100ms;">Vamos conversar sobre como podemos, juntos, construir o futuro do fitness e da análise de dados esportivos.</p>
+                <a href="mailto:brunoloureiro.dev@gmail.com?subject=Oportunidade de Investimento - NutriBot AI" class="cta-button animated-item" style="transition-delay: 200ms;">Agendar uma Reunião</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NutriBot AI. Todos os direitos reservados.</p>
+            <p>Esta é uma apresentação confidencial destinada exclusivamente a potenciais investidores.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedItems = document.querySelectorAll('.animated-item');
+            const countUpItems = document.querySelectorAll('.count-up');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedItems.forEach(item => { observer.observe(item); });
+
+            const countUpObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        if (!el.classList.contains('counted')) {
+                            const target = parseFloat(el.getAttribute('data-target'));
+                            const duration = 1500;
+                            const prefix = el.getAttribute('data-prefix') || '';
+                            const suffix = el.getAttribute('data-suffix') || '';
+                            const decimals = (String(target).split('.')[1] || '').length;
+                            
+                            let start = 0;
+                            const startTime = Date.now();
+
+                            function frame() {
+                                const now = Date.now();
+                                const progress = Math.min((now - startTime) / duration, 1);
+                                const current = start + progress * (target - start);
+                                
+                                el.textContent = prefix + current.toFixed(decimals) + suffix;
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(frame);
+                                } else {
+                                     el.textContent = prefix + target.toFixed(decimals) + suffix;
+                                }
+                            }
+                            requestAnimationFrame(frame);
+                            el.classList.add('counted');
+                        }
+                        observer.unobserve(el);
+                    }
+                });
+            }, observerOptions);
+
+            countUpItems.forEach(item => { countUpObserver.observe(item); });
+        });
+    </script>
+</body>
+</html>
